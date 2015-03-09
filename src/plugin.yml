@@ -1,9 +1,12 @@
 name: FreeForAll
 version: 1.0
 author: IhToN
-website: www.deathlyflags.com
+website: www.minetsii.es
+description: FreeForAll Plugin made for MinETSII Network
 
 main: com.deathlyflags.FFA.FFAPlugin
+
+softdepend: [WorldGuard]
 
 commands:
   ffa: 

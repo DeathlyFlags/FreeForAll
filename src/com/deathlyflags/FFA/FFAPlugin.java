@@ -23,7 +23,7 @@ import com.deathlyflags.Listener.PlayerChat;
 import com.deathlyflags.Listener.QuitEvent;
 import com.deathlyflags.Listener.RespawnManager;
 import com.deathlyflags.Listener.WeatherChange;
-import com.deathlyflags.Util.Messages;
+import com.deathlyflags.Util.Settings;
 
 public class FFAPlugin extends JavaPlugin {
 
@@ -34,12 +34,12 @@ public class FFAPlugin extends JavaPlugin {
 		return instance;
 	}
 
-	private Messages messages;
+	private Settings settings;
 	private SettingFileContent spawn;
 	private SettingFileContent quit;
 
-	public Messages getMessages() {
-		return this.messages;
+	public Settings getMessages() {
+		return this.settings;
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class FFAPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 
-		messages = new Messages();
+		settings = new Settings();
 		spawn = new SettingFileContent(new File("plugins/" + this.getName()
 				+ "/", "Spawn.yml"));
 		quit = new SettingFileContent(new File("plugins/" + this.getName()
@@ -66,6 +66,7 @@ public class FFAPlugin extends JavaPlugin {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onDisable() {
 
@@ -95,11 +96,12 @@ public class FFAPlugin extends JavaPlugin {
 		pm.registerEvents(new MobDamage(), this);
 		pm.registerEvents(new PlayerChat(), this);
 		pm.registerEvents(new QuitEvent(), this);
-		pm.registerEvents(new RespawnManager(this), this);
+		pm.registerEvents(new RespawnManager(), this);
 		pm.registerEvents(new WeatherChange(), this);
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void sendGlobalMessage(String... strings) {
 
 		for (Player player : Bukkit.getOnlinePlayers()) {
