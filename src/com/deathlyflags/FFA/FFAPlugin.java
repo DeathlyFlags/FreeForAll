@@ -87,7 +87,7 @@ public class FFAPlugin extends JavaPlugin {
 
 	public void registerListener(PluginManager pm) {
 
-		pm.registerEvents(new BlockManager(this), this);
+		pm.registerEvents(new BlockManager(), this);
 		pm.registerEvents(new DeathManager(), this);
 		pm.registerEvents(new FallDamage(), this);
 		pm.registerEvents(new FlintAndSteel(), this);
