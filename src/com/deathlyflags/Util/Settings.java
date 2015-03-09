@@ -1,5 +1,7 @@
 package com.deathlyflags.Util;
 
+import java.util.List;
+
 public class Settings {
 
 	private SettingsManager mm;
@@ -18,6 +20,7 @@ public class Settings {
 	public final Boolean autoJoin;
 	public final Boolean fallDamage;
 	public final int fasUses;
+	public final List<String> materialWhitelist;
 		
 	
 	public Settings(){
@@ -38,6 +41,8 @@ public class Settings {
 		this.autoJoin = new Boolean(mm.getMessage("settings.autoJoin"));
 		this.fallDamage = new Boolean(mm.getMessage("settings.fallDamage"));
 		this.fasUses = new Integer(mm.getMessage("settings.fasUses"));
+		
+		this.materialWhitelist = mm.getConfig().getStringList("materialWhitelist");
 	}
 	
 	public SettingsManager getMsgManager(){

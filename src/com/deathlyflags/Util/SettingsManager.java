@@ -62,7 +62,24 @@ public class SettingsManager {
 		this.config.addDefault("settings.fallDamage", false);
 		this.config.addDefault("settings.fasUses", 3);
 		
-		this.config.options().header("Here you can configure the message!");
+		this.config.addDefault("materialWhitelist", new String[] { "FIRE", "FLINT_AND_STEEL" });
+		
+		getConfig().options().header(
+				"#############################################" + "\n" +
+				"#      - FreeForAll for MinETSII.es -       #" + "\n" +
+				"#############################################" + "\n" +
+				"# Boolean options can be:" + "\n" +
+				"#    > true = Option enabled" + "\n" +
+				"#    > false = Option disabled" + "\n" +
+				"# fasUses is the numer of times the player can use the Flint and Steel" + "\n" +
+				"# Permissions" + "\n" +
+				"#    > ffa.itemdrop - Players with this permission can drop items" + "\n" +
+				"#    > ffa.itempickup - Players with this permission can pick up items" + "\n" +
+				"#    > ffa.build - Players with this permission can build (destroy and place blocks)" + "\n" +
+				"#    > ffa.setspawn - Let the player use the command /lc reload" + "\n" +
+				"#    > ffa.setquitlocation - Let the player use the command /lc reload" + "\n" +
+				"#############################################" + "\n"
+		);
 		
 		this.config.options().copyDefaults(true);
 		
