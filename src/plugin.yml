@@ -1,0 +1,10 @@
+name: FreeForAll
+version: 1.0
+author: IhToN
+website: www.deathlyflags.com
+
+main: com.deathlyflags.FFA.FFAPlugin
+
+commands:
+  ffa: 
+    description: /ffa <join|quit|players|setspawn|setquitlocation> 
