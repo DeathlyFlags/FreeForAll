@@ -15,7 +15,7 @@ public class BlockManager implements Listener {
 		Player p = e.getPlayer();
 
 		if (FFAPlugin.ingame.contains(p.getName())) {
-			if (!p.hasPermission("ffa.blockbreak")) {
+			if (!p.hasPermission("ffa.build")) {
 				e.setCancelled(true);
 			}
 		}
@@ -25,7 +25,7 @@ public class BlockManager implements Listener {
 	public void BlockP(BlockPlaceEvent e) {
 		Player p = e.getPlayer();
 		if (FFAPlugin.ingame.contains(e.getPlayer().getName())) {
-			if (!p.hasPermission("ffa.blockbreak")) {
+			if (!p.hasPermission("ffa.build")) {
 				e.setCancelled(true);
 			}
 		}

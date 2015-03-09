@@ -29,7 +29,7 @@ public class Settings {
 		this.quitmessage = prefix + mm.getMessage("messages.quitMessage");
 		this.noperm = prefix + mm.getMessage("messages.noPerm");
 		this.deathmessage = prefix + mm.getMessage("messages.deathMessage");
-		this.chatmessage = prefix + mm.getMessage("messages.chatMessage");
+		this.chatmessage = mm.getMessage("messages.chatMessage");
 		this.whoisonline = prefix + mm.getMessage("messages.whosOnline");
 		this.ffamessage = prefix + mm.getMessage("messages.ffaMessage");
 		this.setspawn = prefix + mm.getMessage("messages.setSpawn");

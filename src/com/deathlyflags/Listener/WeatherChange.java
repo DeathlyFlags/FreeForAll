@@ -9,7 +9,6 @@ public class WeatherChange implements Listener {
 	@EventHandler
 	public void WeatherChange(WeatherChangeEvent e) {
 		e.setCancelled(true);
-
 	}
 
 }
