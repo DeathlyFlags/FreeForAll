@@ -60,7 +60,7 @@ public class SettingsManager {
 		
 		this.config.addDefault("settings.autoJoin", false);
 		this.config.addDefault("settings.fallDamage", false);
-		this.config.addDefault("settings.fasUses", "3");
+		this.config.addDefault("settings.fasUses", 3);
 		
 		this.config.options().header("Here you can configure the message!");
 		

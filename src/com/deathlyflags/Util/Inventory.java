@@ -14,7 +14,7 @@ public class Inventory {
 		this.plugin = FFAPlugin.getInstance();
 	}
 	
-	public void GiveInventory(Player p) {
+	public void GiveInventory(final Player p) {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this.plugin,
 					new Runnable() {
 						public void run() {
