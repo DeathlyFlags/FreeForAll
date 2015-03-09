@@ -1,11 +1,8 @@
 package com.deathlyflags.Listener;
 
-import java.util.Random;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,19 +14,20 @@ import org.bukkit.plugin.Plugin;
 import com.deathlyflags.FFA.FFAPlugin;
 import com.sk89q.worldguard.bukkit.RegionContainer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class FlintAndSteel implements Listener {
-	
-	private final int fasUses = (int) Math.ceil(65 / FFAPlugin.getInstance().getMessages().fasUses);
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void FlintandSteel(PlayerInteractEvent e) {
 
 		Player p = e.getPlayer();
-
+		int fasUses = (int) Math.ceil(65 / FFAPlugin.getInstance().getMessages().fasUses);
+		
 		if (FFAPlugin.ingame.contains(p.getName())
 				&& e.getAction() == Action.RIGHT_CLICK_BLOCK
 				&& p.getItemInHand() != null) {
@@ -43,33 +41,22 @@ public class FlintAndSteel implements Listener {
 				if (getWorldGuard() != null) {
 					RegionContainer container = getWorldGuard().getRegionContainer();
 					RegionManager regions = container.get(loc.getWorld());
-					ProtectedRegion region = regions.getRegion("spawn");
+					ApplicableRegionSet region = regions.getApplicableRegions(loc);
 
-					if (region.getFlag(DefaultFlag.LIGHTER).equals("allow")) {
-						IgniteBlock(loc);
+					if (region.getFlag(DefaultFlag.LIGHTER) == StateFlag.State.ALLOW) {
+						is.setDurability((short) (is.getDurability() + fasUses));
+						if(is.getDurability() >= 65)
+							p.setItemInHand(null);
+					} else {
+						e.setCancelled(true);
 					}
-					is.setDurability((short) (is.getDurability() + fasUses));
-					if(is.getDurability() >= 65)
-						p.setItemInHand(null);
 				} else {
-					IgniteBlock(loc);
 					is.setDurability((short) (is.getDurability() + fasUses));
 					if(is.getDurability() >= 65)
 						p.setItemInHand(null);
 				}
 
 			}
-		}
-	}
-	
-	private void IgniteBlock(Location loc){
-		loc.add(0.5, 1, 0.5);
-		if (loc.getBlock().getType() == Material.AIR) {
-			loc.getWorld().playSound(loc, Sound.FIRE_IGNITE,
-					1.0F,
-					new Random().nextFloat() * 0.4F + 0.8F);
-			loc.getBlock().setType(Material.FIRE);
-			
 		}
 	}
 
