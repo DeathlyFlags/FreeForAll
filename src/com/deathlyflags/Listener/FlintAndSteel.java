@@ -1,5 +1,7 @@
 package com.deathlyflags.Listener;
 
+import static com.sk89q.worldguard.bukkit.BukkitUtil.toVector;
+
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -15,7 +17,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import com.deathlyflags.FFA.FFAPlugin;
+import com.sk89q.worldedit.Vector;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.managers.RegionManager;
 
 public class FlintAndSteel implements Listener {
 	
@@ -41,8 +47,13 @@ public class FlintAndSteel implements Listener {
 
 				if (getWorldGuard() != null) {
 					WorldGuardPlugin worldGuard = getWorldGuard();
-					
-					if (worldGuard.canBuild(p, loc)) {
+					Vector pt = toVector(e.getClickedBlock());
+
+					RegionManager regionManager = worldGuard
+							.getRegionManager(loc.getWorld());
+					ApplicableRegionSet set = regionManager
+							.getApplicableRegions(pt);
+					if (set.allows(DefaultFlag.LIGHTER)) {
 						loc.add(0.5, 1, 0.5);
 						if (loc.getBlock().getType() == Material.AIR) {
 							loc.getWorld().playSound(loc, Sound.FIRE_IGNITE,
