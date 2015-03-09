@@ -6,7 +6,7 @@ description: FreeForAll Plugin made for MinETSII Network
 
 main: com.deathlyflags.FFA.FFAPlugin
 
-softdepend: [WorldGuard, WorldEdit]
+softdepend: [WorldGuard]
 
 commands:
   ffa: 

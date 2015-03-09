@@ -1,7 +1,5 @@
 package com.deathlyflags.Listener;
 
-import static com.sk89q.worldguard.bukkit.BukkitUtil.toVector;
-
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -17,11 +15,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import com.deathlyflags.FFA.FFAPlugin;
-import com.sk89q.worldedit.Vector;
+import com.sk89q.worldguard.bukkit.RegionContainer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class FlintAndSteel implements Listener {
 	
@@ -39,40 +37,39 @@ public class FlintAndSteel implements Listener {
 			ItemStack is = p.getItemInHand();
 
 			if (is.getType() == Material.FLINT_AND_STEEL) {
-				is.setDurability((short) (is.getDurability() + fasUses));
-				if(is.getDurability() >= 65)
-					p.setItemInHand(null);
 
 				Location loc = e.getClickedBlock().getLocation();
 
 				if (getWorldGuard() != null) {
-					WorldGuardPlugin worldGuard = getWorldGuard();
-					Vector pt = toVector(e.getClickedBlock());
+					RegionContainer container = getWorldGuard().getRegionContainer();
+					RegionManager regions = container.get(loc.getWorld());
+					ProtectedRegion region = regions.getRegion("spawn");
 
-					RegionManager regionManager = worldGuard
-							.getRegionManager(loc.getWorld());
-					ApplicableRegionSet set = regionManager
-							.getApplicableRegions(pt);
-					if (set.allows(DefaultFlag.LIGHTER)) {
-						loc.add(0.5, 1, 0.5);
-						if (loc.getBlock().getType() == Material.AIR) {
-							loc.getWorld().playSound(loc, Sound.FIRE_IGNITE,
-									1.0F,
-									new Random().nextFloat() * 0.4F + 0.8F);
-							loc.getBlock().setType(Material.FIRE);
-						}
+					if (region.getFlag(DefaultFlag.LIGHTER).equals("allow")) {
+						IgniteBlock(loc);
 					}
+					is.setDurability((short) (is.getDurability() + fasUses));
+					if(is.getDurability() >= 65)
+						p.setItemInHand(null);
 				} else {
-					loc.add(0.5, 1, 0.5);
-					if (loc.getBlock().getType() == Material.AIR) {
-						loc.getWorld().playSound(loc, Sound.FIRE_IGNITE,
-								1.0F,
-								new Random().nextFloat() * 0.4F + 0.8F);
-						loc.getBlock().setType(Material.FIRE);
-					}
+					IgniteBlock(loc);
+					is.setDurability((short) (is.getDurability() + fasUses));
+					if(is.getDurability() >= 65)
+						p.setItemInHand(null);
 				}
 
 			}
+		}
+	}
+	
+	private void IgniteBlock(Location loc){
+		loc.add(0.5, 1, 0.5);
+		if (loc.getBlock().getType() == Material.AIR) {
+			loc.getWorld().playSound(loc, Sound.FIRE_IGNITE,
+					1.0F,
+					new Random().nextFloat() * 0.4F + 0.8F);
+			loc.getBlock().setType(Material.FIRE);
+			
 		}
 	}
 
