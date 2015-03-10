@@ -27,25 +27,49 @@ public class Inventory {
 
 						for (String armour : FFAPlugin.getInstance()
 								.getSettings().armourInventory) {
-							Material block = (StringUtils.isNumeric(armour)) ? Material
-									.getMaterial(new Integer(armour))
-									: Material.getMaterial(armour);
+							String[] itemMaterial = armour.split("#");
+							Material block = (StringUtils
+									.isNumeric(itemMaterial[0])) ? Material
+									.getMaterial(new Integer(itemMaterial[0]))
+									: Material.getMaterial(itemMaterial[0]);
+
+							ItemStack is = new ItemStack(block);
+							if (itemMaterial.length > 1) {
+								Boolean first = true;
+								try {
+									for (String enchantments : itemMaterial) {
+										if (!first) {
+											String[] enchantment = enchantments
+													.split(",");
+											Integer level = (enchantment.length == 1) ? 1
+													: new Integer(
+															enchantment[1]);
+											is.addEnchantment(Enchantment
+													.getByName(enchantment[0]),
+													level);
+										} else
+											first = false;
+									}
+								} catch (Exception e) {
+								}
+							}
+
 							switch (FFAPlugin.getInstance().getSettings().armourInventory
 									.indexOf(armour)) {
 							case 0:
 								p.getInventory()
-										.setHelmet(new ItemStack(block));
+										.setHelmet(new ItemStack(is));
 								break;
 							case 1:
 								p.getInventory().setChestplate(
-										new ItemStack(block));
+										new ItemStack(is));
 								break;
 							case 2:
 								p.getInventory().setLeggings(
-										new ItemStack(block));
+										new ItemStack(is));
 								break;
 							case 3:
-								p.getInventory().setBoots(new ItemStack(block));
+								p.getInventory().setBoots(new ItemStack(is));
 								break;
 							}
 						}
