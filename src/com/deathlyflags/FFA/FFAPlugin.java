@@ -38,7 +38,7 @@ public class FFAPlugin extends JavaPlugin {
 	private SettingFileContent spawn;
 	private SettingFileContent quit;
 
-	public Settings getMessages() {
+	public Settings getSettings() {
 		return this.settings;
 	}
 

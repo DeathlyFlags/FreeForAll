@@ -62,6 +62,9 @@ public class SettingsManager {
 		this.config.addDefault("settings.fallDamage", false);
 		this.config.addDefault("settings.fasUses", 3);
 		
+		this.config.addDefault("armourInventory", new String[] { "IRON_HELMET", "IRON_CHESTPLATE", "IRON_LEGGINGS", "IRON_BOOTS" });
+		this.config.addDefault("itemInventory", new String[] { "IRON_SWORD#DAMAGE_ALL,1", "BOW", "FLINT_AND_STEEL", "FISHING_ROD", "ARROW:10" });
+		
 		this.config.addDefault("materialWhitelist", new String[] { "FIRE", "FLINT_AND_STEEL" });
 		
 		getConfig().options().header(
@@ -72,6 +75,9 @@ public class SettingsManager {
 				"#    > true = Option enabled" + "\n" +
 				"#    > false = Option disabled" + "\n" +
 				"# fasUses is the numer of times the player can use the Flint and Steel" + "\n" +
+				"# Don't change the order in armourInventory" + "\n" +
+				"# To add enchantments follow: IRON_SWORD#DAMAGE_ALL,1" + "\n" +
+				"#    > being ITEM_MATERIAL#ENCHANTMENT,LEVEL" + "\n" +
 				"# Permissions" + "\n" +
 				"#    > ffa.itemdrop - Players with this permission can drop items" + "\n" +
 				"#    > ffa.itempickup - Players with this permission can pick up items" + "\n" +

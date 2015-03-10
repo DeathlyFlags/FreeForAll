@@ -39,7 +39,7 @@ public class DeathManager implements Listener {
 
 				FFAPlugin
 						.sendGlobalMessage(FFAPlugin.getInstance()
-								.getMessages().deathmessage
+								.getSettings().deathmessage
 								.replaceAll("xplayer1x", killer.getName())
 								.replace("&", "§")
 								.replaceAll("xplayer2x", p.getName()));

@@ -21,6 +21,8 @@ public class Settings {
 	public final Boolean fallDamage;
 	public final int fasUses;
 	public final List<String> materialWhitelist;
+	public final List<String> armourInventory;
+	public final List<String> itemInventory;
 		
 	
 	public Settings(){
@@ -43,6 +45,9 @@ public class Settings {
 		this.fasUses = new Integer(mm.getMessage("settings.fasUses"));
 		
 		this.materialWhitelist = mm.getConfig().getStringList("materialWhitelist");
+		
+		this.armourInventory = mm.getConfig().getStringList("armourInventory");
+		this.itemInventory = mm.getConfig().getStringList("itemInventory");
 	}
 	
 	public SettingsManager getMsgManager(){

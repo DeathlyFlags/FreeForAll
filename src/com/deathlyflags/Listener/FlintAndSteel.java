@@ -26,7 +26,7 @@ public class FlintAndSteel implements Listener {
 	public void FlintandSteel(PlayerInteractEvent e) {
 
 		Player p = e.getPlayer();
-		int fasUses = (int) Math.ceil(65 / FFAPlugin.getInstance().getMessages().fasUses);
+		int fasUses = (int) Math.ceil(65 / FFAPlugin.getInstance().getSettings().fasUses);
 		
 		if (FFAPlugin.ingame.contains(p.getName())
 				&& e.getAction() == Action.RIGHT_CLICK_BLOCK

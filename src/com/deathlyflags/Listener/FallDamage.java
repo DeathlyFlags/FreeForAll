@@ -13,7 +13,7 @@ public class FallDamage implements Listener {
 
 	@EventHandler
 	public void FallDamageManager(EntityDamageEvent e) {
-		if (e.getEntity().getType() == EntityType.PLAYER && !FFAPlugin.getInstance().getMessages().fallDamage) {
+		if (e.getEntity().getType() == EntityType.PLAYER && !FFAPlugin.getInstance().getSettings().fallDamage) {
 			Player p = (Player) e.getEntity();
 			
 			if (FFAPlugin.ingame.contains(p.getName()) && e.getCause() == DamageCause.FALL) {

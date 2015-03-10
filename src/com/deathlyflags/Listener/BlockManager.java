@@ -33,7 +33,7 @@ public class BlockManager implements Listener {
 	@SuppressWarnings("deprecation")
 	public BlockManager() {
 		place_whitelist = new ArrayList<Material>();
-		for(String material : FFAPlugin.getInstance().getMessages().materialWhitelist){
+		for(String material : FFAPlugin.getInstance().getSettings().materialWhitelist){
 			Material block = (StringUtils.isNumeric(material)) ? Material.getMaterial(new Integer(material)) : Material.getMaterial(material);
 			place_whitelist.add(block);
 		}

@@ -15,7 +15,7 @@ public class PlayerChat implements Listener {
 
 		if (FFAPlugin.ingame.contains(p.getName())) {
 
-			e.setFormat(FFAPlugin.getInstance().getMessages().chatmessage
+			e.setFormat(FFAPlugin.getInstance().getSettings().chatmessage
 					.replace("&", "§"));
 
 		}

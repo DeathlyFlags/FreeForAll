@@ -21,7 +21,7 @@ public class FFACommands implements CommandExecutor {
 
 			if (args.length != 1) {
 
-				p.sendMessage(FFAPlugin.getInstance().getMessages().ffamessage
+				p.sendMessage(FFAPlugin.getInstance().getSettings().ffamessage
 						.replace("&", "§"));
 
 			} else  {
@@ -32,7 +32,7 @@ public class FFACommands implements CommandExecutor {
 						FFAPlugin.ingame.add(p.getName());
 
 						FFAPlugin.sendGlobalMessage(FFAPlugin.getInstance()
-								.getMessages().joinmessage.replaceAll(
+								.getSettings().joinmessage.replaceAll(
 								"xplayerx", p.getName()).replace("&", "§"));
 
 						new Inventory().GiveInventory(p);
@@ -46,7 +46,7 @@ public class FFACommands implements CommandExecutor {
 					if (FFAPlugin.ingame.contains(p.getName())) {
 
 						FFAPlugin.sendGlobalMessage(FFAPlugin.getInstance()
-								.getMessages().quitmessage.replaceAll(
+								.getSettings().quitmessage.replaceAll(
 								"xplayerx", p.getName()).replace("&", "§"));
 
 						p.getInventory().clear();
@@ -69,12 +69,12 @@ public class FFACommands implements CommandExecutor {
 
 						FFAPlugin.getInstance().setSpawnLocation(
 								p.getLocation());
-						p.sendMessage(FFAPlugin.getInstance().getMessages().setspawn
+						p.sendMessage(FFAPlugin.getInstance().getSettings().setspawn
 								.replace("&", "§"));
 
 					} else {
 
-						p.sendMessage(FFAPlugin.getInstance().getMessages().noperm
+						p.sendMessage(FFAPlugin.getInstance().getSettings().noperm
 								.replace("&", "§"));
 
 					}
@@ -82,7 +82,7 @@ public class FFACommands implements CommandExecutor {
 
 				case "players":
 					for (String playername : FFAPlugin.ingame) {
-						p.sendMessage(FFAPlugin.getInstance().getMessages().whoisonline
+						p.sendMessage(FFAPlugin.getInstance().getSettings().whoisonline
 								.replace("&", "§") + playername);
 					}
 					break;
@@ -91,7 +91,7 @@ public class FFACommands implements CommandExecutor {
 					if (p.hasPermission("ffa.setquitlocation")) {
 						FFAPlugin.getInstance()
 								.setQuitLocation(p.getLocation());
-						p.sendMessage(FFAPlugin.getInstance().getMessages().quitlocation
+						p.sendMessage(FFAPlugin.getInstance().getSettings().quitlocation
 								.replace("&", "§"));
 					}
 					break;
