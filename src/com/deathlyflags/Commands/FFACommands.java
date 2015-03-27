@@ -83,7 +83,8 @@ public class FFACommands implements CommandExecutor {
 		                if (b instanceof ItemStack[]){
 		                        armor = (ItemStack[]) b;
 		                  } else if (b instanceof List){
-		                      List<ItemStack> listb = (List<ItemStack>) b;
+		                      @SuppressWarnings("unchecked")
+							List<ItemStack> listb = (List<ItemStack>) b;
 		                      armor = (ItemStack[]) listb.toArray(new ItemStack[0]);
 		                  }
 		                p.getInventory().setContents(inventory);
