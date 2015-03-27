@@ -37,6 +37,7 @@ public class FFAPlugin extends JavaPlugin {
 	private Settings settings;
 	private SettingFileContent spawn;
 	private SettingFileContent quit;
+	private SettingFileContent playerInv;
 
 	public Settings getSettings() {
 		return this.settings;
@@ -58,9 +59,12 @@ public class FFAPlugin extends JavaPlugin {
 				+ "/", "Spawn.yml"));
 		quit = new SettingFileContent(new File("plugins/" + this.getName()
 				+ "/", "Quit.yml"));
+		playerInv = new SettingFileContent(new File("plugins/" + this.getName()
+				+ "/", "playerInv.yml"));
 
 		this.repair();
 		this.repairconfig();
+		this.repairconfigpi();
 		this.registerListener(Bukkit.getPluginManager());
 		this.getCommand("ffa").setExecutor(new FFACommands());
 
@@ -236,6 +240,42 @@ public class FFAPlugin extends JavaPlugin {
 		config.set("Quit.PosPitch", loc.getYaw());
 
 		this.quit.saveConfig();
+
+	}
+	
+	/***
+	 * 
+	 * playerInv Config
+	 * 
+	 */
+	private void repairconfigpi() {
+
+		FileConfiguration config = this.quit.getConfig();
+
+		config.options().copyHeader(true);
+		config.options().copyDefaults(true);
+
+		this.quit.saveConfig();
+
+	}
+
+	public FileConfiguration getPlayerInvConf() {
+
+		FileConfiguration config = this.playerInv.getConfig();
+
+		if (config == null) {
+			this.repairconfigpi();
+		}
+		return config;
+	}
+
+	public void savePlayerInvConf() {
+
+		if (this.playerInv.getConfig() == null
+				|| this.playerInv.getFile() == null) {
+			return;
+		}
+		this.playerInv.saveConfig();
 
 	}
 }
