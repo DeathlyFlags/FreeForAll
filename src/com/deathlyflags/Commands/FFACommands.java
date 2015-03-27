@@ -14,6 +14,7 @@ import com.deathlyflags.Util.Inventory;
 
 public class FFACommands implements CommandExecutor {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onCommand(CommandSender cs, Command cmd, String label,
 			String[] args) {
@@ -65,28 +66,15 @@ public class FFACommands implements CommandExecutor {
 
 						p.setGameMode(GameMode.SURVIVAL);
 
-		                Object a = FFAPlugin.getInstance().getPlayerInvConf().get(p.getName() + ".inventory");
-		                Object b = FFAPlugin.getInstance().getPlayerInvConf().get(p.getName() + ".armor");
+		                List<ItemStack> a = (List<ItemStack>) FFAPlugin.getInstance().getPlayerInvConf().get(p.getName() + ".inventory");
+		                List<ItemStack> b = (List<ItemStack>) FFAPlugin.getInstance().getPlayerInvConf().get(p.getName() + ".armor");
 		                if(a == null || b == null){
 		                    p.sendMessage("No saved inventory to load");
 		                    return true;
 		                }
-		                ItemStack[] inventory = null;
-		                ItemStack[] armor = null;
-		                if (a instanceof ItemStack[]){
-		                      inventory = (ItemStack[]) a;
-		                } else if (a instanceof List){
-		                        @SuppressWarnings("unchecked")
-								List<ItemStack> lista = (List<ItemStack>) a;
-		                        inventory = (ItemStack[]) lista.toArray(new ItemStack[0]);
-		                }
-		                if (b instanceof ItemStack[]){
-		                        armor = (ItemStack[]) b;
-		                  } else if (b instanceof List){
-		                      @SuppressWarnings("unchecked")
-							List<ItemStack> listb = (List<ItemStack>) b;
-		                      armor = (ItemStack[]) listb.toArray(new ItemStack[0]);
-		                  }
+		                ItemStack[] inventory = (ItemStack[]) a.toArray(new ItemStack[0]);
+		                ItemStack[] armor = b.toArray(new ItemStack[0]);
+
 		                p.getInventory().setContents(inventory);
 		                p.getInventory().setArmorContents(armor);
 						
