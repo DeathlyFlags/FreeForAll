@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.deathlyflags.Commands.FFACommands;
 import com.deathlyflags.Commands.SettingFileContent;
+import com.deathlyflags.Listener.AutoJoin;
 import com.deathlyflags.Listener.BlockManager;
 import com.deathlyflags.Listener.DeathManager;
 import com.deathlyflags.Listener.FallDamage;
@@ -94,6 +95,7 @@ public class FFAPlugin extends JavaPlugin {
 		pm.registerEvents(new BlockManager(), this);
 		pm.registerEvents(new DeathManager(), this);
 		pm.registerEvents(new FallDamage(), this);
+		pm.registerEvents(new AutoJoin(), this);
 		pm.registerEvents(new FlintAndSteel(), this);
 		pm.registerEvents(new HungerManager(), this);
 		pm.registerEvents(new ItemManager(), this);
@@ -250,12 +252,12 @@ public class FFAPlugin extends JavaPlugin {
 	 */
 	private void repairconfigpi() {
 
-		FileConfiguration config = this.quit.getConfig();
+		FileConfiguration config = this.playerInv.getConfig();
 
 		config.options().copyHeader(true);
 		config.options().copyDefaults(true);
 
-		this.quit.saveConfig();
+		this.playerInv.saveConfig();
 
 	}
 
